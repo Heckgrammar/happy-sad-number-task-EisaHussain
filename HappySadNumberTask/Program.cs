@@ -1,4 +1,4 @@
-﻿namespace HappySadNumberTask
+namespace HappySadNumberTask
 {
     internal class Program
     {
@@ -25,6 +25,29 @@
             //The program should take a number as input and output whether the number is happy or sad
             //test your program with the inputs of 19 and 20
             //show your output in the readme file
+            int number = Convert.ToInt32(Console.ReadLine());
+            int[] testNumbers = { 19, 20 };
+            bool isHappy = IsHappyNumber(number);
+            Console.WriteLine($"Number {number} is {isHappy}");
+        }
+        static bool IsHappyNumber(int num)
+        {
+            HashSet<int> seen = new HashSet<int>();
+            while (num != 1 && !seen.Contains(num))
+            {
+                seen.Add(num);
+                num = SumOfSquaresOfDigits(num);
+            }
+            return num == 1;
+        }
+        static int SumOfSquaresOfDigits(int num)
+        {
+            int sum = 0;
+            int digit1 = num % 10;
+            sum = digit1 * digit1;
+            int digit2 = num / 10;
+            sum = sum + (digit2 * digit2);
+            return sum;
         }
     }
 }
